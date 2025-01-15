@@ -1,3 +1,4 @@
+// Main.java
 package org.converter;
 
 import java.util.Scanner;
@@ -9,16 +10,28 @@ public class Main {
         InputHandler inputHandler = new InputHandler(scanner);
 
         while (true) {
-            System.out.println("Currency Converter App:");
-            System.out.println("1. SEK to USD");
-            System.out.println("2. USD to SEK");
-            System.out.println("3. SEK to Euro");
-            System.out.println("4. Euro to SEK");
-            System.out.println("5. Exit");
-            System.out.print("Enter your choice: ");
+            // Display the menu with ASCII art and colors
+            ConsoleStyler.printColored(ConsoleStyler.Color.BLUE, "╔════════════════════════════════╗");
+            ConsoleStyler.printColored(ConsoleStyler.Color.BLUE, "║        Currency Converter      ║");
+            ConsoleStyler.printColored(ConsoleStyler.Color.BLUE, "╚════════════════════════════════╝");
 
+            String[] options = {
+                    "1. SEK to USD",
+                    "2. USD to SEK",
+                    "3. SEK to Euro",
+                    "4. Euro to SEK",
+                    "5. Exit"
+            };
+
+            for (String option : options) {
+                ConsoleStyler.printColored(ConsoleStyler.Color.GREEN, option);
+            }
+
+            System.out.print("Enter your choice: ");
             int choice = inputHandler.getMenuChoice();
+
             if (choice == 5) {
+                ConsoleStyler.printColored(ConsoleStyler.Color.YELLOW, "Exiting the application. Goodbye!");
                 break;
             }
 
@@ -26,7 +39,7 @@ public class Main {
             double amount = inputHandler.getAmount();
 
             double result = converter.convert(choice, amount);
-            System.out.printf("Converted amount: %.2f\n", result);
+            ConsoleStyler.printColored(ConsoleStyler.Color.YELLOW, String.format("Converted amount: %.2f", result));
         }
     }
 }
